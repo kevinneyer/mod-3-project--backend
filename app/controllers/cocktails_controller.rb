@@ -10,4 +10,16 @@ class CocktailsController < ApplicationController
         render json: cocktail, include: :ingredients
     end
 
+    def update
+        cocktail = Cocktail.find(params[:id])
+        cocktail.update(cocktail_params)
+        render json: cocktail, include: :ingredients
+    end
+
+    private
+
+    def cocktail_params
+        params.require(:cocktail).permit(:likes, :name, :ingredients, :comment, :quantity, :bio)
+    end
+
 end
