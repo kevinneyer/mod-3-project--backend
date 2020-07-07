@@ -3,5 +3,6 @@ class AddColumnToCocktails < ActiveRecord::Migration[6.0]
     add_column :cocktails, :comment, :string
     add_column :cocktails, :bio, :string
     add_column :cocktails, :image, :string
+    add_column :cocktails, :likes, :integer, default: 0
   end
 end

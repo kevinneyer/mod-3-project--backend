@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_203304) do
     t.string "comment"
     t.string "bio"
     t.string "image"
+    t.integer "likes", default: 0
   end
 
   create_table "customers", force: :cascade do |t|
