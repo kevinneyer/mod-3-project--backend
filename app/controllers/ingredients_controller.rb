@@ -12,4 +12,5 @@ class IngredientsController < ApplicationController
         # render json: CocktailSerializer.new(ingredient)
         render json: ingredient
     end
+
 end

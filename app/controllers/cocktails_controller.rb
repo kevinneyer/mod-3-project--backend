@@ -22,14 +22,21 @@ class CocktailsController < ApplicationController
     end
 
     def create
-        cocktail = Cocktail.create(cocktail_params)
+        
+        cocktail = Cocktail.new(cocktail_params)
+        ingredients = params["ingredients"]
+        ingredients.each do |ingredient|
+            ingredient = Ingredient.find_or_create_by(name: ingredient)
+            cocktail.ingredients << ingredient
+        end
+        cocktail.save
         render json: cocktail, include: :ingredients
     end
 
     private
 
     def cocktail_params
-        params.require(:cocktail).permit(:likes, :name, :ingredients, :comment, :quantity, :bio)
+        params.require(:cocktail).permit(:likes, :image, :name, :comment, :quantity, :bio, ingredients: [])
     end
 
 end
