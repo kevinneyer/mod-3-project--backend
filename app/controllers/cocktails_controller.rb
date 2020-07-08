@@ -16,6 +16,16 @@ class CocktailsController < ApplicationController
         render json: cocktail, include: :ingredients
     end
 
+    def new
+        cocktail = Cocktail.new
+        render json: cocktail, include: :ingredients
+    end
+
+    def create
+        cocktail = Cocktail.create(cocktail_params)
+        render json: cocktail, include: :ingredients
+    end
+
     private
 
     def cocktail_params
