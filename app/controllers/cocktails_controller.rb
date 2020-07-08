@@ -33,6 +33,12 @@ class CocktailsController < ApplicationController
         render json: cocktail, include: :ingredients
     end
 
+    def destroy
+        cocktail = Cocktail.find(params[:id])
+        cocktail.destroy
+    end
+
+
     private
 
     def cocktail_params
