@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_174313) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "comment_id"
+    t.string "comments"
     t.string "bio"
     t.string "image"
     t.integer "likes", default: 0

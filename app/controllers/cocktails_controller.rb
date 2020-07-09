@@ -22,7 +22,19 @@ class CocktailsController < ApplicationController
         comment = params["comment"]
         comment = Comment.find_or_create_by(content: comment)
         cocktail.comments << comment
+<<<<<<< HEAD
+=======
+        # byebug
+        # cocktail.update(cocktail_params)
+>>>>>>> 22ac59b6cadd09c0426682b0003779cd6099d66a
         cocktail.save
+       
+        render json: cocktail, include: [:ingredients, :comments]
+    end
+
+    def update_likes
+        cocktail = Cocktail.find(params[:id])
+        cocktail.update(cocktail_params)
         render json: cocktail, include: [:ingredients, :comments]
     end
 
