@@ -2,32 +2,34 @@ class CocktailsController < ApplicationController
 
     def index
         cocktails = Cocktail.all
-        render json: cocktails, include: :ingredients
+        render json: cocktails, include: [:ingredients, :comments]
         end
 
     def show
         cocktail = Cocktail.find(params[:id])
-        render json: cocktail, include: :ingredients
+        render json: cocktail, include: [:ingredients, :comments]
     end
 
     def update_comments
-      
         cocktail = Cocktail.find(params[:id])
-        comment = params["comment"]
-        cocktail.comments << comment << "|"
-        cocktail.save 
-        render json: cocktail, include: :ingredients
+        
+        cocktail.save
+        render json: cocktail, include: [:ingredients, :comments]
     end
 
     def update
         cocktail = Cocktail.find(params[:id])
-        cocktail.update(cocktail_params)
-        render json: cocktail, include: :ingredients
+        comment = params["comment"]
+        comment = Comment.find_or_create_by(content: comment)
+        cocktail.comments << comment
+        # byebug
+        cocktail.save
+        render json: cocktail, include: [:ingredients, :comments]
     end
 
     def new
         cocktail = Cocktail.new
-        render json: cocktail, include: :ingredients
+        render json: cocktail, include: [:ingredients, :comments]
     end
 
     def create
@@ -38,7 +40,7 @@ class CocktailsController < ApplicationController
             cocktail.ingredients << ingredient
         end
         cocktail.save
-        render json: cocktail, include: :ingredients
+        render json: cocktail, include: [:ingredients, :comments]
     end
 
     def destroy
