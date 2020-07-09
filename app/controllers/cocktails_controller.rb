@@ -22,7 +22,6 @@ class CocktailsController < ApplicationController
     end
 
     def create
-        
         cocktail = Cocktail.new(cocktail_params)
         ingredients = params["ingredients"]
         ingredients.each do |ingredient|
