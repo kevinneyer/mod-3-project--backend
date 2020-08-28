@@ -3,7 +3,7 @@ class CocktailsController < ApplicationController
     def index
         cocktails = Cocktail.all
         render json: cocktails, include: [:ingredients, :comments]
-        end
+    end
 
     def show
         cocktail = Cocktail.find(params[:id])
@@ -22,8 +22,6 @@ class CocktailsController < ApplicationController
         comment = params["comment"]
         comment = Comment.find_or_create_by(content: comment)
         cocktail.comments << comment
-        # byebug
-        # cocktail.update(cocktail_params)
         cocktail.save
        
         render json: cocktail, include: [:ingredients, :comments]
